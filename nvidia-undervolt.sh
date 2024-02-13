@@ -18,8 +18,9 @@ cat <<EOF > ~/.local/bin/nvidia-undervolt
 
 nvidia-smi -pm 1
 nvidia-smi -i 0 -lgc 0,1980
-DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150
--a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750
+DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150 \
+-a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750 \
+-a CurrentMetaMode="nvidia-auto-select +0+0 {AllowGSYNCCompatible=On}"
 
 # -a [gpu:0]/GPUFanControlState=1 \
 # -a [fan:0]/GPUTargetFanSpeed=75 \
