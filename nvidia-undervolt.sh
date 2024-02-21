@@ -19,8 +19,7 @@ cat <<EOF > ~/.local/bin/nvidia-undervolt
 nvidia-smi -pm 1
 nvidia-smi -i 0 -lgc 0,1980
 DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150 \
--a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750 \
--a CurrentMetaMode="nvidia-auto-select +0+0 {AllowGSYNCCompatible=On}"
+-a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750
 
 # -a [gpu:0]/GPUFanControlState=1 \
 # -a [fan:0]/GPUTargetFanSpeed=75 \
@@ -48,3 +47,17 @@ EOF
 chown root:root /etc/systemd/system/nvidia-undervolt.service
 chmod 644 /etc/systemd/system/nvidia-undervolt.service
 sudo systemctl enable nvidia-undervolt.service
+
+# Enable AllowGSYNCCompatible
+cat <<EOF > ~/.config/autostart/nvidia-settings.desktop
+[Desktop Entry]
+Type=Application
+Exec=nvidia-settings -a CurrentMetaMode="nvidia-auto-select +0+0 {AllowGSYNCCompatible=On}"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[it_IT]=Nvidia G-Sync
+Name=Nvidia G-Sync
+Comment[it_IT]=
+Comment=
+EOF
