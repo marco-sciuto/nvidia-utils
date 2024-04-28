@@ -21,6 +21,9 @@ nvidia-smi -i 0 -lgc 0,1980
 DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150 \
 -a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750
 
+#https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2060268
+rm /dev/dri/card0
+
 # -a [gpu:0]/GPUFanControlState=1 \
 # -a [fan:0]/GPUTargetFanSpeed=75 \
 # -a [fan:1]/GPUTargetFanSpeed=75 \
