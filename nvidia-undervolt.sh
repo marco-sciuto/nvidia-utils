@@ -27,7 +27,7 @@ DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0
 # -a [gpu:0]/GPUPowerMizerMode=1 \
 #nvidia-smi -i 0 -pl 200
 EOF
-chmod +x ~/.local/bin/nvidia-undervolt
+chmod +755 ~/.local/bin/nvidia-undervolt
 
 # Autostart script
 cat <<EOF > /etc/systemd/system/nvidia-undervolt.service
@@ -61,3 +61,7 @@ Name=Nvidia G-Sync
 Comment[it_IT]=
 Comment=
 EOF
+
+#In case of overclock not applied
+#https://wiki.archlinux.org/title/NVIDIA/Troubleshooting#Overclocking_not_working_with_Unknown_Error
+#echo "\nneeds_root_rights=yes" >> /etc/X11/Xwrapper.config
