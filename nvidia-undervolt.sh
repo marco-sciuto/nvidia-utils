@@ -22,7 +22,8 @@ DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0
 -a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750
 
 #https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2060268
-rm /dev/dri/card0
+#rm /dev/dri/card0
+#set the parameter on grub as mentioned in comment #32
 
 # -a [gpu:0]/GPUFanControlState=1 \
 # -a [fan:0]/GPUTargetFanSpeed=75 \
