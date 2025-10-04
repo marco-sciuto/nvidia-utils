@@ -10,7 +10,8 @@ Section "OutputClass"
 EndSection
 EOF
 
-gdmuid=`cat /etc/passwd | grep gdm | awk -F ':' '{print $3}'`
+user=$(who | grep "(:0)" | awk '{print $1}' | head -n 1)
+uid=$(id -u $user)
 
 # Udervolt script
 cat <<EOF > ~/.local/bin/nvidia-undervolt
@@ -18,7 +19,7 @@ cat <<EOF > ~/.local/bin/nvidia-undervolt
 
 nvidia-smi -pm 1
 nvidia-smi -i 0 -lgc 0,1980
-DISPLAY=:0 XAUTHORITY=/run/user/$gdmuid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150 \
+DISPLAY=:0 XAUTHORITY=/run/user/$uid/gdm/Xauthority nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=150 \
 -a [gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels=750
 
 #https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2060268
@@ -41,8 +42,6 @@ After=runlevel4.target
 
 [Service]
 Type=oneshot
-Environment="DISPLAY=:0"
-Environment="XAUTHORITY=/etc/X11/.Xauthority"
 ExecStart=$HOME/.local/bin/nvidia-undervolt
 
 [Install]
