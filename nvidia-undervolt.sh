@@ -55,7 +55,7 @@ sudo systemctl enable nvidia-undervolt.service
 cat <<EOF > ~/.config/autostart/nvidia-settings.desktop
 [Desktop Entry]
 Type=Application
-Exec=nvidia-settings -a CurrentMetaMode="nvidia-auto-select +0+0 {AllowGSYNCCompatible=On}"
+Exec=nvidia-settings -a CurrentMetaMode="DP-0: 2560x1440_144 +0+0 {AllowGSYNCCompatible=On}"
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
